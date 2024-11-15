@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="preview-section">
+        <h2>Your Personalized Gift Card</h2>
+        
+        <div class="preview-card">
+            <div class="generated-image">
+                {% if image.startswith('static/') %}
+                    <img src="/{{ image }}" alt="Generated gift card image" class="card-image">
+                {% else %}
+                    <div class="placeholder-image">
+                        <p>Image generation failed</p>
+                    </div>
+                {% endif %}
+            </div>
+            
+            <div class="generated-message">
+                <h3>Your Message:</h3>
+                <p>{{ message }}</p>
+            </div>
+        </div>
+
+        <div class="gift-card-details">
+            <h3>Gift Card Details</h3>
+            <div class="details-box">
+                <p><strong>Gift Card Link:</strong> <span class="placeholder-text">Gift card link will appear here</span></p>
+                <p><strong>Amount:</strong> <span class="placeholder-text">$XX.XX</span></p>
+            </div>
+        </div>
+
+        <div class="action-buttons">
+            <button class="btn-secondary" onclick="window.history.back()">Edit Message</button>
+            <button class="btn-primary">Send Gift Card</button>
+        </div>
+    </div>
+</div>
+{% endblock %} 

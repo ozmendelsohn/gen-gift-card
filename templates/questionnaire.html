@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <form id="questionnaireForm" class="questionnaire-form" action="/generate-message" method="POST">
+        <h2>Let's personalize your message for {{ recipient_name }}</h2>
+        
+        {% if initial_thoughts %}
+        <div class="initial-thoughts-summary">
+            <h3>Your Initial Thoughts:</h3>
+            <p>{{ initial_thoughts }}</p>
+        </div>
+        {% endif %}
+
+        {% if suggestions.explanation %}
+        <div class="suggestions-summary">
+            <h3>Our Analysis:</h3>
+            <p>{{ suggestions.explanation }}</p>
+        </div>
+        {% endif %}
+
+        <div class="form-group">
+            <label>What's your relationship with {{ recipient_name }}?</label>
+            <select name="relationship" required>
+                <option value="">Choose...</option>
+                <option value="family" {% if suggestions.relationship == "family" %}selected{% endif %}>Family</option>
+                <option value="friend" {% if suggestions.relationship == "friend" %}selected{% endif %}>Friend</option>
+                <option value="colleague" {% if suggestions.relationship == "colleague" %}selected{% endif %}>Colleague</option>
+                <option value="other" {% if suggestions.relationship == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>What's the occasion for this gift?</label>
+            <select name="occasion" required>
+                <option value="">Choose...</option>
+                <option value="birthday" {% if suggestions.occasion == "birthday" %}selected{% endif %}>Birthday</option>
+                <option value="holiday" {% if suggestions.occasion == "holiday" %}selected{% endif %}>Holiday</option>
+                <option value="thank_you" {% if suggestions.occasion == "thank_you" %}selected{% endif %}>Thank You</option>
+                <option value="congratulations" {% if suggestions.occasion == "congratulations" %}selected{% endif %}>Congratulations</option>
+                <option value="other" {% if suggestions.occasion == "other" %}selected{% endif %}>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>What emotion would you like to convey?</label>
+            <select name="emotion" required>
+                <option value="">Choose...</option>
+                <option value="joy" {% if suggestions.emotion == "joy" %}selected{% endif %}>Joy</option>
+                <option value="gratitude" {% if suggestions.emotion == "gratitude" %}selected{% endif %}>Gratitude</option>
+                <option value="love" {% if suggestions.emotion == "love" %}selected{% endif %}>Love</option>
+                <option value="excitement" {% if suggestions.emotion == "excitement" %}selected{% endif %}>Excitement</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Would you like to add any specific memories or inside jokes?</label>
+            <textarea name="memories" rows="4" 
+                      placeholder="Optional: Add any special memories or messages you'd like to include...">{{ suggestions.memories }}</textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="button" class="btn-secondary" onclick="window.history.back()">Back</button>
+            <button type="submit" class="btn-primary">Generate Message</button>
+        </div>
+    </form>
+</div>
+{% endblock %} 

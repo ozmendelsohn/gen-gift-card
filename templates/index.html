@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container">
+    <div class="welcome-section">
+        <h1>Welcome to Gift Card Customizer</h1>
+        <p>Create a personalized gift card message that truly expresses how you feel.</p>
+    </div>
+
+    <div class="initial-form">
+        <form id="initialForm" action="/start-questionnaire" method="POST">
+            <div class="form-group">
+                <label for="recipient_name">Who is this gift for?</label>
+                <input type="text" id="recipient_name" name="recipient_name" required 
+                       placeholder="Enter recipient's name">
+            </div>
+
+            <div class="form-group">
+                <label for="initial_thoughts">Tell us anything you'd like to express in your message</label>
+                <textarea id="initial_thoughts" name="initial_thoughts" rows="5" 
+                         placeholder="Share your thoughts, feelings, or any specific things you'd like to include in your message..."></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="gift_card_type">Gift Card Type</label>
+                <select id="gift_card_type" name="gift_card_type" required>
+                    <option value="">Select a gift card type...</option>
+                    <option value="amazon">Amazon</option>
+                    <option value="apple">Apple</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="amount">Amount ($)</label>
+                <input type="number" id="amount" name="amount" min="1" required 
+                       placeholder="Enter amount">
+            </div>
+
+            <button type="submit" class="btn-primary">Start Personalizing</button>
+        </form>
+    </div>
+</div>
+{% endblock %} 
