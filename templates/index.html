@@ -1,43 +1,101 @@
 {% extends "base.html" %}
 
 {% block content %}
-<div class="container">
-    <div class="welcome-section">
-        <h1>Welcome to Gift Card Customizer</h1>
-        <p>Create a personalized gift card message that truly expresses how you feel.</p>
-    </div>
-
-    <div class="initial-form">
-        <form id="initialForm" action="/start-questionnaire" method="POST">
-            <div class="form-group">
-                <label for="recipient_name">Who is this gift for?</label>
-                <input type="text" id="recipient_name" name="recipient_name" required 
-                       placeholder="Enter recipient's name">
+<div class="min-h-screen bg-gradient-to-b from-rose-100 to-teal-100 flex items-center justify-center p-4">
+    <div class="max-w-md w-full bg-white rounded-lg shadow-xl p-8">
+        <h1 class="text-3xl font-bold text-center text-gray-800 mb-6">Create Your Gift Card</h1>
+        
+        <form action="{{ url_for('start_questionnaire') }}" method="POST" class="space-y-6">
+            <div>
+                <label for="recipient_name" class="block text-sm font-medium text-gray-700 mb-2">
+                    Recipient's Name:
+                </label>
+                <input type="text" 
+                       id="recipient_name" 
+                       name="recipient_name" 
+                       required
+                       class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500">
             </div>
 
-            <div class="form-group">
-                <label for="initial_thoughts">Tell us anything you'd like to express in your message</label>
-                <textarea id="initial_thoughts" name="initial_thoughts" rows="5" 
-                         placeholder="Share your thoughts, feelings, or any specific things you'd like to include in your message..."></textarea>
+            <div>
+                <label for="initial_thoughts" class="block text-sm font-medium text-gray-700 mb-2">
+                    Enter your gift card message:
+                </label>
+                <textarea id="initial_thoughts" 
+                          name="initial_thoughts" 
+                          rows="5"
+                          class="w-full p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-teal-500"
+                          placeholder="Write your heartfelt message here..."></textarea>
+                <div id="error-message" class="mt-2 text-sm text-red-600 hidden"></div>
             </div>
 
-            <div class="form-group">
-                <label for="gift_card_type">Gift Card Type</label>
-                <select id="gift_card_type" name="gift_card_type" required>
-                    <option value="">Select a gift card type...</option>
-                    <option value="amazon">Amazon</option>
-                    <option value="apple">Apple</option>
-                </select>
-            </div>
+            <!-- Hidden fields with default values -->
+            <input type="hidden" name="gift_card_type" value="general">
+            <input type="hidden" name="amount" value="0">
 
-            <div class="form-group">
-                <label for="amount">Amount ($)</label>
-                <input type="number" id="amount" name="amount" min="1" required 
-                       placeholder="Enter amount">
-            </div>
-
-            <button type="submit" class="btn-primary">Start Personalizing</button>
+            <button type="submit" 
+                    class="w-full bg-teal-500 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded transition duration-300">
+                Generate Gift Card
+            </button>
         </form>
     </div>
 </div>
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .from-rose-100 {
+        background-image: linear-gradient(to bottom, #ffe4e6, #ccfbf1);
+    }
+
+    .to-teal-100 {
+        background-color: #ccfbf1;
+    }
+
+    .focus\:ring-2:focus {
+        box-shadow: 0 0 0 2px rgba(20, 184, 166, 0.2);
+    }
+
+    .focus\:ring-teal-500:focus {
+        border-color: #14b8a6;
+    }
+
+    .bg-teal-500 {
+        background-color: #14b8a6;
+    }
+
+    .hover\:bg-teal-600:hover {
+        background-color: #0d9488;
+    }
+
+    .transition {
+        transition-property: all;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+        transition-duration: 300ms;
+    }
+
+    .shadow-xl {
+        box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('form');
+    const initialThoughts = document.getElementById('initial_thoughts');
+    const errorMessage = document.getElementById('error-message');
+
+    form.addEventListener('submit', function(e) {
+        if (initialThoughts.value.trim() === '') {
+            e.preventDefault();
+            errorMessage.textContent = 'Please enter a message for your gift card.';
+            errorMessage.classList.remove('hidden');
+        } else {
+            errorMessage.classList.add('hidden');
+        }
+    });
+});
+</script>
 {% endblock %} 

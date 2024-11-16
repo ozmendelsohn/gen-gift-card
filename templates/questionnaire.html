@@ -2,27 +2,15 @@
 
 {% block content %}
 <div class="container">
-    <form id="questionnaireForm" class="questionnaire-form" action="/generate-message" method="POST">
-        <h2>Let's personalize your message for {{ recipient_name }}</h2>
+    <!-- Questionnaire Form -->
+    <form id="questionnaire-form" action="/generate-message" method="POST">
+        <input type="hidden" name="recipient_name" value="{{ recipient_name }}">
         
-        {% if initial_thoughts %}
-        <div class="initial-thoughts-summary">
-            <h3>Your Initial Thoughts:</h3>
-            <p>{{ initial_thoughts }}</p>
-        </div>
-        {% endif %}
-
-        {% if suggestions.explanation %}
-        <div class="suggestions-summary">
-            <h3>Our Analysis:</h3>
-            <p>{{ suggestions.explanation }}</p>
-        </div>
-        {% endif %}
-
+        <!-- Relationship Field -->
         <div class="form-group">
-            <label>What's your relationship with {{ recipient_name }}?</label>
-            <select name="relationship" required>
-                <option value="">Choose...</option>
+            <label for="relationship">Relationship</label>
+            <select name="relationship" id="relationship" class="form-control" required>
+                <option value="">Select relationship</option>
                 <option value="family" {% if suggestions.relationship == "family" %}selected{% endif %}>Family</option>
                 <option value="friend" {% if suggestions.relationship == "friend" %}selected{% endif %}>Friend</option>
                 <option value="colleague" {% if suggestions.relationship == "colleague" %}selected{% endif %}>Colleague</option>
@@ -30,10 +18,11 @@
             </select>
         </div>
 
+        <!-- Occasion Field -->
         <div class="form-group">
-            <label>What's the occasion for this gift?</label>
-            <select name="occasion" required>
-                <option value="">Choose...</option>
+            <label for="occasion">Occasion</label>
+            <select name="occasion" id="occasion" class="form-control" required>
+                <option value="">Select occasion</option>
                 <option value="birthday" {% if suggestions.occasion == "birthday" %}selected{% endif %}>Birthday</option>
                 <option value="holiday" {% if suggestions.occasion == "holiday" %}selected{% endif %}>Holiday</option>
                 <option value="thank_you" {% if suggestions.occasion == "thank_you" %}selected{% endif %}>Thank You</option>
@@ -42,10 +31,11 @@
             </select>
         </div>
 
+        <!-- Emotion Field -->
         <div class="form-group">
-            <label>What emotion would you like to convey?</label>
-            <select name="emotion" required>
-                <option value="">Choose...</option>
+            <label for="emotion">Primary Emotion</label>
+            <select name="emotion" id="emotion" class="form-control" required>
+                <option value="">Select emotion</option>
                 <option value="joy" {% if suggestions.emotion == "joy" %}selected{% endif %}>Joy</option>
                 <option value="gratitude" {% if suggestions.emotion == "gratitude" %}selected{% endif %}>Gratitude</option>
                 <option value="love" {% if suggestions.emotion == "love" %}selected{% endif %}>Love</option>
@@ -53,16 +43,103 @@
             </select>
         </div>
 
+        <!-- Memories Field -->
         <div class="form-group">
-            <label>Would you like to add any specific memories or inside jokes?</label>
-            <textarea name="memories" rows="4" 
-                      placeholder="Optional: Add any special memories or messages you'd like to include...">{{ suggestions.memories }}</textarea>
+            <label for="memories">Special Memories or Messages (Optional)</label>
+            <textarea name="memories" id="memories" class="form-control" rows="4">{{ suggestions.memories }}</textarea>
         </div>
 
-        <div class="form-actions">
-            <button type="button" class="btn-secondary" onclick="window.history.back()">Back</button>
-            <button type="submit" class="btn-primary">Generate Message</button>
-        </div>
+        <button type="submit" class="btn btn-primary">Generate Card</button>
     </form>
+
+    {% if error %}
+    <div class="error-message">
+        {{ error }}
+    </div>
+    {% endif %}
 </div>
+
+<style>
+    .container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-control {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 1rem;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .loading-spinner {
+        border: 4px solid #f3f3f3;
+        border-top: 4px solid #3498db;
+        border-radius: 50%;
+        width: 50px;
+        height: 50px;
+        animation: spin 1s linear infinite;
+        margin: 2rem auto;
+    }
+
+    @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+    }
+
+    .preview-container {
+        max-width: 800px;
+        margin: 2rem auto;
+        padding: 1rem;
+    }
+
+    .card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-image {
+        width: 100%;
+        height: 400px;
+        overflow: hidden;
+    }
+
+    .preview-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
+
+    .card-message {
+        padding: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+        color: #333;
+        background: #f8f9fa;
+    }
+
+    .error-message {
+        color: #dc3545;
+        padding: 1rem;
+        margin: 1rem 0;
+        background: #f8d7da;
+        border-radius: 4px;
+        border: 1px solid #f5c6cb;
+    }
+</style>
+
 {% endblock %} 

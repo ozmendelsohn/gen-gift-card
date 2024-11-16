@@ -176,8 +176,8 @@ textarea::placeholder {
 
 .preview-card {
     background: white;
-    border-radius: 8px;
-    box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
     padding: 2rem;
     margin: 2rem 0;
 }
@@ -216,9 +216,10 @@ textarea::placeholder {
 
 .details-box {
     background: #f8f9fa;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 8px;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
+    border: 1px solid #dee2e6;
 }
 
 .placeholder-text {
@@ -229,20 +230,28 @@ textarea::placeholder {
 .action-buttons {
     display: flex;
     justify-content: space-between;
+    gap: 1.5rem;
     margin-top: 2rem;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
 }
 
 .btn-secondary {
     background-color: #6c757d;
     color: white;
-    padding: 10px 20px;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 6px;
 }
 
 .btn-secondary:hover {
     background-color: #5a6268;
+    transform: translateY(-1px);
 }
 
 .initial-thoughts-summary {
@@ -297,17 +306,133 @@ textarea::placeholder {
 }
 
 .card-image {
-    width: 100%;
-    max-height: 400px;
-    object-fit: contain;
+    max-width: 100%;
+    height: auto;
     border-radius: 8px;
-    margin-bottom: 1rem;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
 }
 
 .generated-image {
     text-align: center;
     background: #f8f9fa;
-    padding: 1rem;
+    padding: 1.5rem;
     border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.message-content {
+    white-space: pre-line;
+    line-height: 1.8;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.gift-card-input {
     margin-bottom: 1rem;
+}
+
+.gift-card-input label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    font-weight: bold;
+}
+
+.gift-card-input input {
+    width: 100%;
+    padding: 0.8rem;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.gift-card-input input:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+}
+
+.preview-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    padding: 2rem;
+    margin: 2rem 0;
+}
+
+.generated-image {
+    text-align: center;
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 2rem;
+}
+
+.card-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.message-content {
+    white-space: pre-line;
+    line-height: 1.8;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    margin-top: 1rem;
+    font-size: 1.1rem;
+    color: #2c3e50;
+}
+
+.details-box {
+    background: #f8f9fa;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 1rem;
+    border: 1px solid #dee2e6;
+}
+
+.action-buttons {
+    display: flex;
+    justify-content: space-between;
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.action-buttons button {
+    flex: 1;
+    padding: 1rem 2rem;
+    font-size: 1.1rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-primary {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    border-radius: 6px;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268;
+    transform: translateY(-1px);
 } 
